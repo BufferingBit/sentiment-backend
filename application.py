@@ -6,6 +6,7 @@ from collections import Counter
 from flask_cors import CORS
 import nltk
 import json
+import os
 
 nltk.download('vader_lexicon')
 
@@ -101,4 +102,5 @@ def analyze():
     return jsonify(response)
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    port = int(os.environ.get('PORT', 8080))  # <-- Important Cloud Run requirement
+    application.run(host='0.0.0.0', port=port)  # <-- Must listen on all interfaces
