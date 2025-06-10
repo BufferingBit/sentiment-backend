@@ -10,8 +10,8 @@ import json
 nltk.download('vader_lexicon')
 
 # Initialize components
-app = Flask(__name__)
-CORS(app)
+application = Flask(__name__)
+CORS(application)
 sia = SentimentIntensityAnalyzer()
 kw_model = KeyBERT()
 
@@ -45,7 +45,7 @@ def assign_aspect(keywords_list):
     return "Other"
 
 # API route
-@app.route('/analyze', methods=['POST'])
+@application.route('/analyze', methods=['POST'])
 def analyze():
     data = request.get_json()
     reviews = data.get('reviews', [])
@@ -101,4 +101,4 @@ def analyze():
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
